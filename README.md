@@ -64,6 +64,17 @@
     python -u scripts/test/sim_grasp_multiple.py --num-view 1 --object_set egad --scene egad --num-rounds 100 --model ./data/networks/neugraspnet_pile_efficient.pt --resolution=64 --type neu_grasp_pn_deeper_efficient --qual-th 0.5 --max_grasp_queries_at_once 40 --result-path ./data/results/neu_grasp_egad_efficient --sim-gui
     ```
 
+### ⚠️ Note for Open3D Versions > 0.12.0
+
+To prevent potential issues such as segmentation faults or the program hanging indefinitely (often caused by OpenMP-related parallelism in Open3D), **ensure you run your scripts with the following environment variable set**:
+
+```bash
+OMP_NUM_THREADS=1 python your_script.py
+```
+
+This limits OpenMP to a single thread, which helps avoid threading conflicts, especially in multi-threaded environments or when using libraries like Open3D for TSDF integration.
+
+
 ### Acknowledgements:
 - GPG (https://github.com/atenpas/gpg)
 - Convolutional Occupancy Networks (https://github.com/autonomousvision/convolutional_occupancy_networks)
